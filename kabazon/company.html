@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon.co.jp 出品者プロフィール: 株式会社 TSUTSUTSU</title>
+    <link rel="icon" href="img/logo.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 出品者プロフィール特有のスタイル */
+        .seller-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .seller-name {
+            font-size: 30px;
+            font-weight: bold;
+            color: #0F1111;
+        }
+        .feedback-summary {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .feedback-stars { color: #F4A460; font-weight: bold; }
+        .positive-rate { font-weight: bold; }
+
+        .info-section {
+            margin-bottom: 30px;
+            border: 1px solid #e7e7e7;
+            border-radius: 8px;
+            padding: 25px;
+            background-color: #fff;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #c45500; /* Amazonオレンジ */
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .story-box {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+            border-left: 5px solid #007185;
+            margin-bottom: 20px;
+            display: flex; /* 画像とテキストを横並びに */
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .ceo-image-wrapper {
+            flex: 0 0 150px; /* 画像エリアの幅固定 */
+            text-align: center;
+        }
+        
+        .ceo-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; /* 円形に切り抜き */
+            object-fit: cover; /* 枠に合わせてトリミング */
+            border: 3px solid #007185;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        .ceo-name-tag {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .story-text {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+            flex: 1; /* 残りの幅を使う */
+        }
+        .quote {
+            font-style: italic;
+            color: #555;
+            margin: 10px 0;
+            font-weight: bold;
+            background: #fff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .company-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .company-table th {
+            text-align: left;
+            padding: 10px;
+            background-color: #f0f2f2;
+            border: 1px solid #ddd;
+            width: 30%;
+        }
+        .company-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        /* 経営理念などのリスト */
+        .philosophy-list {
+            list-style: none;
+            padding: 0;
+        }
+        .philosophy-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .philosophy-list li::before {
+            content: "✔";
+            color: #c45500;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* スマホ対応 */
+        @media (max-width: 600px) {
+            .story-box {
+                flex-direction: column;
+                align-items: center;
+            }
+            .ceo-image-wrapper {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="common-header"></div>
+
+    <div class="container" style="display:block;">
+        
+        <div class="seller-header">
+            <div class="seller-name">株式会社 TSUTSUTSU</div>
+            <div class="feedback-summary">
+                <span class="feedback-stars">★★★★★</span>
+                <span class="positive-rate">100%の高い評価</span> (過去12ヶ月間で53万件の評価)
+            </div>
+            <div style="font-size:12px; color:#565959; margin-top:5px;">
+                <a href="#" style="color:#007185;">質問する</a> | 
+                <a href="#" style="color:#007185;">カスタマーサービスの電話番号</a>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3 class="section-title">創業者ストーリー：カバオとの出会い、そして「強奪」</h3>
+            <div class="story-box">
+                <div class="ceo-image-wrapper">
+                    <img src="img/tsuceo.png" alt="代表取締役 つー" class="ceo-img">
+                    <div class="ceo-name-tag">代表取締役社長<br>つー (Tsu)</div>
+                </div>
+
+                <div class="story-text">
+                    <p>全ては、ある雨の日の路地裏から始まりました。</p>
+                    <p>当時、まだ何者でもなかった私（つー）は、社会の理不尽さに打ちのめされ、途方に暮れていました。そんな時、ゴミ捨て場の横でうずくまる奇妙な生物に出会いました。それが<strong>カバオ</strong>でした。</p>
+                    <p>カバオは、降りしきる雨に打たれながら、ただ一言、こう呟いていました。</p>
+                    <div class="quote">「……しかたないよ」</div>
+                    <p>その言葉には、諦めと、許しと、究極の脱力がありました。私の心に電撃が走りました。「これだ。現代人が求めているのは『頑張れ』じゃない。『しかたない』という免罪符だ」と。</p>
+                    <p>私はその場でカバオに食パンの耳を与え、懐柔に成功。即座に「しかたないよ」というフレーズの商用利用権に関する契約書（カバオは読めない）にサインさせました。事実上の<strong>「概念の強奪」</strong>です。</p>
+                    <p>その後、カバオの声をサンプリングし、その魂の叫びを製品化しました。カバオ自身は現在、本社の地下2階で「諦念エグゼクティブ・オフィサー（TEO）」として、1日3食のキュウリと引き換えに新たな「しかたない」を生成し続けています。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3 class="section-title">特定商取引法に基づく表記</h3>
+            <table class="company-table">
+                <tr>
+                    <th>販売業者</th>
+                    <td>株式会社 TSUTSUTSU (TSUTSUTSU Inc.)</td>
+                </tr>
+                <tr>
+                    <th>代表責任者</th>
+                    <td>つー (Tsu)</td>
+                </tr>
+                <tr>
+                    <th>店舗運営責任者</th>
+                    <td>カバオ (Kabao) ※実質的な権限はありません</td>
+                </tr>
+                <tr>
+                    <th>所在地</th>
+                    <td>〒100-0000<br>東京都千代田区諦め町 1-2-3 諦観ビル地下2階</td>
+                </tr>
+                <tr>
+                    <th>電話番号</th>
+                    <td>03-0000-0000（※「しかたないよ」と自動音声が流れるだけです）</td>
+                </tr>
+                <tr>
+                    <th>事業内容</th>
+                    <td>
+                        <ul>
+                            <li>諦め関連グッズの企画・製造・販売</li>
+                            <li>メンタル崩壊予防デバイスの開発</li>
+                            <li>カバオの飼育・管理</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="info-section">
+            <h3 class="section-title">経営理念</h3>
+            <ul class="philosophy-list">
+                <li><strong>努力しない。</strong> 結果が出なくても、それは環境のせいです。</li>
+                <li><strong>期待しない。</strong> 期待しなければ、裏切られることもありません。</li>
+                <li><strong>反省しない。</strong> 終わったことを悔やんでも、時間は戻りません。しかたないよ。</li>
+            </ul>
+        </div>
+
+        <div class="info-section">
+            <h3 class="section-title">返品・保証について</h3>
+            <p style="font-size:14px;">
+                商品の不具合、配送の遅延、イメージ違いなど、いかなるトラブルにつきましても、弊社は以下のポリシーを貫いております。<br>
+                <br>
+                <strong>「それもまた、しかたないよ」</strong><br>
+                <br>
+                ※原則として返品・返金は受け付けておりませんが、カバオの体調が良い時のみ対応する場合もございます。
+            </p>
+        </div>
+
+    </div>
+
+    <div id="common-footer"></div>
+
+    <script src="layout.js"></script>
+</body>
+</html>

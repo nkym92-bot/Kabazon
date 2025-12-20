@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kabazonカート</title>
+    <link rel="icon" href="img/logo.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="common-header"></div>
+
+    <div class="container">
+        <div class="cart-main">
+            <h1>ショッピングカート</h1>
+            <div id="cart-list"></div>
+        </div>
+        <div class="cart-sidebar">
+            <div class="subtotal" style="font-size:18px; font-weight:bold; margin-bottom:20px;">
+                小計 (<span id="total-count">0</span> 点): <span style="color:#B12704;">￥<span id="total-price">0</span></span>
+            </div>
+            <button class="checkout-btn" onclick="alert('レジに進みます（嘘です）')">レジに進む</button>
+        </div>
+    </div>
+
+    <div id="common-footer"></div>
+
+    <script src="layout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', renderCart);
+
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('kabazonCart')) || [];
+            const list = document.getElementById('cart-list');
+            list.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                list.innerHTML = '<div style="text-align:center; padding:50px;"><h2>カートは空です</h2></div>';
+            } else {
+                cart.forEach((item, index) => {
+                    total += parseInt(item.price);
+                    list.innerHTML += `
+                        <div class="cart-item">
+                            <div class="item-image">${item.imageEmoji || '📦'}</div>
+                            <div style="flex:1;">
+                                <div style="font-weight:bold; color:#007185;">${item.name}</div>
+                                <div style="color:#B12704; font-weight:bold;">￥${item.price.toLocaleString()}</div>
+                                <button onclick="removeItem(${index})" style="color:#007185; border:none; background:none; cursor:pointer; text-decoration:underline;">削除</button>
+                            </div>
+                        </div>`;
+                });
+            }
+            document.getElementById('total-count').innerText = cart.length;
+            document.getElementById('total-price').innerText = total.toLocaleString();
+        }
+
+        function removeItem(index) {
+            const cart = JSON.parse(localStorage.getItem('kabazonCart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('kabazonCart', JSON.stringify(cart));
+            renderCart();
+            updateHeaderCartCount();
+        }
+    </script>
+</body>
+</html>

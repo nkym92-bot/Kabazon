@@ -1,0 +1,60 @@
+フォルダー パスの一覧:  ボリューム Windows
+ボリューム シリアル番号は D8AE-EB84 です
+C:.
+|   tree.txt
+|   
++---angry
+|       angry (1).mp3
+|       angry (2).mp3
+|       angry (3).mp3
+|       angry (4).mp3
+|       angry (5).mp3
+|       angry (6).mp3
+|       
++---fanny
+|       fanny (1).mp3
+|       fanny (2).mp3
+|       fanny (3).mp3
+|       fanny (4).mp3
+|       fanny (5).mp3
+|       fanny (6).mp3
+|       
++---heart
+|       heart (1).mp3
+|       heart (10).mp3
+|       heart (11).mp3
+|       heart (2).mp3
+|       heart (3).mp3
+|       heart (4).mp3
+|       heart (5).mp3
+|       heart (6).mp3
+|       heart (7).mp3
+|       heart (8).mp3
+|       heart (9).mp3
+|       
++---mu
+|       mu (1).mp3
+|       mu (2).mp3
+|       mu (3).mp3
+|       mu (4).mp3
+|       
++---nomal
+|       nomal (1).mp3
+|       nomal (2).mp3
+|       nomal (3).mp3
+|       nomal (4).mp3
+|       nomal (5).mp3
+|       nomal (6).mp3
+|       nomal (7).mp3
+|       nomal (8).mp3
+|       
+\---sad
+        sad (1).mp3
+        sad (2).mp3
+        sad (3).mp3
+        sad (4).mp3
+        sad (5).mp3
+        sad (6).mp3
+        sad (7).mp3
+        sad (8).mp3
+        

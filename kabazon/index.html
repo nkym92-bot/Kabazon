@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kabazon | しかたないよというボタン</title>
+    <link rel="icon" href="img/logo.jpg" type="image/jpeg">
+    
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #0F1111;
+            --link-color: #007185;
+            --price-color: #B12704;
+            --star-color: #F4A460;
+            --button-primary: #ffd814;
+            --button-primary-hover: #f7ca00;
+            --button-secondary: #ffa41c;
+            --header-bg: #131921;
+            --header-text: #ffffff;
+        }
+
+        body {
+            font-family: "Amazon Ember", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaeded;
+            color: var(--text-color);
+            line-height: 1.4;
+        }
+
+        /* ヘッダー */
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            min-height: 60px;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .logo span { color: #f90; }
+        
+        .search-bar {
+            flex-grow: 1;
+            display: flex;
+            margin: 0 20px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px 0 0 4px;
+            border: none;
+            outline: none;
+        }
+        .search-btn {
+            background-color: #febd69;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .cart-icon {
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* メインコンテンツ */
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            gap: 30px;
+            box-sizing: border-box;
+        }
+
+        /* 左カラム：画像エリア */
+        .left-col {
+            flex: 0 0 35%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+        }
+        .product-image-placeholder {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle, #fff, #f0f0f0);
+            border-radius: 8px;
+        }
+        
+        /* CSSで描く「しかたないよボタン」 */
+        .the-button {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at 30% 30%, #ff4d4d, #cc0000);
+            border-radius: 50%;
+            box-shadow: 
+                0 10px 20px rgba(0,0,0,0.3),
+                inset 0 5px 10px rgba(255,255,255,0.4),
+                0 15px 0 #800000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .the-button.active-anim {
+            animation: pushButton 0.2s ease-out forwards;
+        }
+
+        @keyframes pushButton {
+            0% { transform: translateY(0); box-shadow: 0 15px 0 #800000, 0 10px 20px rgba(0,0,0,0.3); }
+            50% { transform: translateY(15px); box-shadow: 0 0 0 #800000, 0 0 5px rgba(0,0,0,0.3); }
+            100% { transform: translateY(0); box-shadow: 0 15px 0 #800000, 0 10px 20px rgba(0,0,0,0.3); }
+        }
+
+        .the-button:active {
+            transform: translateY(15px);
+            box-shadow: 
+                0 5px 10px rgba(0,0,0,0.3),
+                inset 0 5px 10px rgba(255,255,255,0.4),
+                0 0 0 #800000;
+        }
+
+        .button-text {
+            color: rgba(255,255,255,0.8);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+
+        /* 中央カラム：商品情報 */
+        .center-col {
+            flex: 1;
+            min-width: 0;
+        }
+        .breadcrumb {
+            font-size: 12px;
+            color: #565959;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        .brand-link {
+            color: var(--link-color);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .rating {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 14px;
+            flex-wrap: wrap;
+        }
+        .stars { color: var(--star-color); font-size: 18px; margin-right: 5px;}
+        .rating-count { color: var(--link-color); margin-left: 5px; }
+
+        .price-block {
+            border-top: 1px solid #e7e7e7;
+            border-bottom: 1px solid #e7e7e7;
+            padding: 10px 0;
+            margin: 10px 0;
+        }
+        .price-symbol { font-size: 14px; vertical-align: top; }
+        .price-whole { font-size: 28px; font-weight: 500; }
+        .price-fraction { font-size: 14px; vertical-align: top; }
+        .points-info { font-size: 14px; color: #333; }
+
+        .about-item {
+            margin-top: 20px;
+        }
+        .about-item h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .about-item ul {
+            padding-left: 20px;
+        }
+        .about-item li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* 右カラム：購入ボックス */
+        .right-col {
+            flex: 0 0 240px;
+        }
+        .buy-box {
+            border: 1px solid #d5d9d9;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #fff;
+        }
+        .price-large {
+            color: var(--price-color);
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .delivery-info {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .stock-status {
+            color: #007600;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .btn-add-cart, .btn-buy-now {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            border: 1px solid;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+        }
+        .btn-add-cart {
+            background-color: var(--button-primary);
+            border-color: #fcd200;
+        }
+        .btn-add-cart:hover { background-color: var(--button-primary-hover); }
+        .btn-buy-now {
+            background-color: var(--button-secondary);
+            border-color: #d58e12;
+        }
+        .seller-info {
+            font-size: 12px;
+            color: #565959;
+            margin-top: 10px;
+        }
+
+        /* コンテンツセクション */
+        .content-section {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-top: 1px solid #e7e7e7;
+        }
+        .review-card {
+            margin-bottom: 20px;
+        }
+        .review-title { font-weight: bold; }
+        .review-date { font-size: 12px; color: #565959; }
+        .verified-purchase { color: #c45500; font-size: 11px; font-weight: bold; }
+        
+        .choice-badge {
+            background-color: #232f3e;
+            color: #fff;
+            padding: 4px 8px;
+            font-size: 12px;
+            display: inline-block;
+            transform: skew(-10deg);
+            margin-bottom: 10px;
+        }
+        .choice-text { display: inline-block; transform: skew(10deg); }
+
+        .frequently-bought {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #e7e7e7;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 10px; }
+            .search-bar { order: 3; width: 100%; margin: 10px 0 0 0; }
+            .logo { flex-grow: 1; }
+            .header-nav { justify-content: flex-end; }
+            .container { flex-direction: column; padding: 15px; gap: 15px; }
+            .left-col, .right-col, .center-col { flex: auto; width: 100%; position: static; }
+            .product-image-placeholder { height: 300px; }
+            h1 { font-size: 20px; }
+            .price-whole { font-size: 24px; }
+            .review-card { padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo" onclick="location.href='home.html'">Kaba<span>zon</span></div>
+    
+    <div class="header-nav">
+        <div style="font-size: 12px; line-height: 1.2;">
+            <div>こんにちは、ゲストさん</div>
+            <strong>アカウント＆リスト</strong>
+        </div>
+        <div class="cart-icon" onclick="location.href='cart.html'">
+            🛒 <span style="font-size:12px;">カート (<span id="header-cart-count">0</span>)</span>
+        </div>
+    </div>
+
+    <div class="search-bar">
+        <input type="text" class="search-input" value="しかたないよ" placeholder="検索">
+        <button class="search-btn">🔍</button>
+    </div>
+</header>
+
+<div class="container">
+    <div class="left-col">
+        <div class="product-image-placeholder">
+            <div id="shikatanaiyo-btn" class="the-button" title="クリックして諦めよう">
+                <div class="button-text">しかたないよ</div>
+            </div>
+        </div>
+        <p style="font-size:12px; color:#555; text-align:center; margin-top:10px;">※画像はイメージです。<br>実際の商品はより深い絶望の色をしています。</p>
+    </div>
+
+    <div class="center-col">
+        <div class="breadcrumb">ホビー > パーティー・ジョークグッズ > サウンド玩具</div>
+        
+        <h1>しかたないよというボタン<br> ストレス解消 メンタルケア 肯定感向上 50パターンの「しかたないよ」収録 高音質スピーカー搭載 職場 家庭 夫婦喧嘩 (プレミアムレッド)</h1>
+        
+        <div class="brand-link">ブランド: しかたないよ</div>
+        
+        <div class="rating">
+            <span class="stars">★★★★☆</span>
+            <span class="rating-count">1,208個の評価 | 500件以上のQ&A</span>
+        </div>
+        
+        <div class="choice-badge">
+            <span class="choice-text">Kabazon Choice</span>
+        </div>
+        <span style="font-size:12px; color:#565959;">"諦め" の検索結果</span>
+
+        <div class="price-block">
+            <span style="font-size:12px; color:#565959;">参考価格: <s>￥12,800</s></span><br>
+            <div style="display:flex; align-items:flex-start;">
+                <span style="color:#cc0c39; font-size:24px; margin-right:5px;">-61%</span>
+                <sup class="price-symbol">￥</sup>
+                <span class="price-whole">4,980</span>
+                <span class="price-fraction"></span>
+            </div>
+            <div class="points-info">ポイント: 50pt (1%)</div>
+        </div>
+
+        <div class="about-item">
+            <h3>この商品について</h3>
+            <ul>
+                <li><strong>【心の重荷をワンタップで解放】</strong> つらい時、理不尽な時、どうしようもない時。このボタンを押すだけで、プロの声優が感情豊かに「しかたないよ」と囁きます。自己肯定感が爆上がりする、現代人のためのメンタル防衛デバイスです。</li>
+                <li><strong>【驚異の50バリエーション収録】</strong> たった一言「しかたないよ」にこだわり抜き、50種類のニュアンスを搭載。「優しく包み込むようなしかたないよ」「完全に諦めきったしかたないよ」「少し投げやりなしかたないよ」「悟りを開いたしかたないよ」など、AIランダム再生機能により、その場の空気に最適（または最悪）なトーンで再生されます。</li>
+                <li><strong>【無駄に高級な質感】</strong> 4,980円の価値を感じさせるため、ボタン部分には航空機にも使用される高品質ポリカーボネートを採用。押した瞬間の「カチッ」というタクタイル感（クリック感）は、高級メカニカルキーボードに匹敵する中毒性があります。</li>
+                <li><strong>【ハイレゾ級スピーカー搭載】</strong> 従来のおもちゃのような割れた音ではありません。無駄に重低音が響くウーファー内蔵で、あなたの心臓に直接「諦め」を響かせます。</li>
+                <li><strong>【様々なシーンで】</strong> 上司の無茶振り直後、ダイエット中の夜食前、ガチャで爆死した時、終電を逃した時。あらゆる「詰んだ」状況を肯定します。</li>
+            </ul>
+        </div>
+
+        <div class="frequently-bought">
+            <strong style="color:#c45500;">よく一緒に購入されている商品</strong>
+            <div style="display:flex; align-items:center; margin-top:10px;">
+                <div style="font-size:30px; margin-right:10px;">🔋</div>
+                <div style="font-size:12px; line-height:1.5;">
+                    <span style="color:#007185;">Kabazonベーシック アルカリ乾電池 単4形 8本パック</span><br>
+                    <span style="color:#B12704;">￥890</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-col">
+        <div class="buy-box">
+            <div class="price-large">￥4,980</div>
+            <div class="delivery-info">
+                <a href="#" style="color: #007185; text-decoration: none;">無料配送</a> 明日 <strong>8:00 - 12:00</strong> にお届け
+            </div>
+            <div style="font-size:12px; color:#007600; margin-bottom:10px;">お届け先を選択</div>
+            <div class="stock-status">在庫あり</div>
+            
+            <form>
+                <label style="font-size:12px;">数量: </label>
+                <select style="margin-bottom:10px; width: 100%; padding: 5px;">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>50 (業務用)</option>
+                </select>
+                <button type="button" class="btn-add-cart">カートに入れる</button>
+                <button type="button" class="btn-buy-now">今すぐ買う</button>
+            </form>
+
+            <div class="seller-info">
+                <table>
+                    <tr><td>出荷元</td><td>Kabazon</td></tr>
+                    <tr><td>販売元</td><td><a href="company.html" style="color:#007185;">株式会社 TSUTSUTSU</a></td></tr>
+                </table>
+            </div>
+            
+            <div style="margin-top:15px; border-top:1px solid #ddd; padding-top:10px;">
+                <label style="font-size:12px; display:flex; align-items:center;">
+                    <input type="checkbox" style="margin-right: 5px;"> 
+                    ギフト設定（諦めのメッセージカード付）
+                </label>
+            </div>
+            <div style="margin-top:15px;">
+                <a href="#" style="color:#007185; font-size:12px;">ほしい物リストに追加</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="display:block;">
+    <h2>商品の説明</h2>
+    <p><strong>もう、頑張らなくていい。ただ押すだけでいい。</strong><br>
+    私たちは日々、解決できない問題に直面しています。「しかたないよというボタン」は、そんなあなたに代わって、世界の真理を呟く画期的なガジェットです。</p>
+    
+    <h3>■開発者の想い</h3>
+    <blockquote>
+        「当初は1,980円で販売する予定でしたが、開発中に金型が壊れたり、工場が停電したりといったトラブルが続き、『これもしかたないよ』とコストを受け入れた結果、4,980円になりました。この価格設定もまた、しかたないのです」
+    </blockquote>
+
+    <h3>■スペック</h3>
+    <ul>
+        <li>サイズ：直径 9cm x 高さ 4cm</li>
+        <li>重量：350g（ずっしりとした重みは人生の重みです）</li>
+        <li>電源：単4電池 x 2本（別売）※電池がないと動きませんが、それもしかたないよ。</li>
+    </ul>
+</div>
+
+<div class="container" style="display:block;">
+    <h2>カスタマーレビュー</h2>
+    <div style="display:flex; align-items:center; margin-bottom:20px;">
+        <span class="stars">★★★★☆</span>
+        <span style="font-size:18px; margin-left:10px;">5つ星のうち4.2</span>
+    </div>
+
+    <div class="review-card">
+        <div style="display:flex; align-items:center;">
+            <div style="width:30px; height:30px; background:#ddd; border-radius:50%; margin-right:10px; display:flex; justify-content:center; align-items:center;">👤</div>
+            <span style="font-size:13px;">ツンデレやんきー</span>
+        </div>
+        <div style="display:flex; align-items:center;">
+            <span class="stars">★★★★★</span>
+            <span class="review-title" style="margin-left:5px;">高いけど、元は取れた気がする</span>
+        </div>
+        <div class="review-date">2025年12月10日に日本でレビュー済み</div>
+        <div class="verified-purchase">Amazonで購入</div>
+        <p>職場でミスをして部長に怒鳴られている最中に、ポケットの中でこっそりこのボタンを押しました。大音量で<strong>「まぁ、しかたないよ」</strong>と鳴り響き、会議室が凍りつきました。部長は呆気にとられ、私は開き直ることができました。その後、減給されましたが、ボタンを押したら慰めてくれたので星5つです。</p>
+    </div>
+
+    <div class="review-card">
+        <div style="display:flex; align-items:center;">
+            <div style="width:30px; height:30px; background:#ddd; border-radius:50%; margin-right:10px; display:flex; justify-content:center; align-items:center;">👤</div>
+            <span style="font-size:13px;">ぴす</span>
+        </div>
+        <div style="display:flex; align-items:center;">
+            <span class="stars">★★★☆☆</span>
+            <span class="review-title" style="margin-left:5px;">機能はいいが、値段設定が強気すぎる</span>
+        </div>
+        <div class="review-date">2025年11月22日に日本でレビュー済み</div>
+        <div class="verified-purchase">Amazonで購入</div>
+        <p>4,980円は正直高い。中身はただの音声ボタンです。でも、悔しいことに音質が無駄に良くて、夜中に一人で押すと涙が出てきます。「しかたないよ」のバリエーションの中に、一つだけ「しかたなくないよ」というレア音声が入っている気がするのですが、空耳でしょうか？</p>
+    </div>
+
+    <div class="review-card">
+        <div style="display:flex; align-items:center;">
+            <div style="width:30px; height:30px; background:#ddd; border-radius:50%; margin-right:10px; display:flex; justify-content:center; align-items:center;">👤</div>
+            <span style="font-size:13px;">うし</span>
+        </div>
+        <div style="display:flex; align-items:center;">
+            <span class="stars">★☆☆☆☆</span>
+            <span class="review-title" style="margin-left:5px;">届いた時点で壊れていた</span>
+        </div>
+        <div class="review-date">2025年12月15日に日本でレビュー済み</div>
+        <div class="verified-purchase">Amazonで購入</div>
+        <p>箱を開けてワクワクしながら押したのに、音が鳴りません。販売店に連絡しようと思いましたが、商品名を見て「ああ、しかたないよな」と思い、返品を諦めました。ある意味、商品のコンセプトを極限まで体現しているのかもしれません。悔しい。</p>
+    </div>
+    
+    <div class="review-card">
+        <div style="display:flex; align-items:center;">
+            <div style="width:30px; height:30px; background:#ddd; border-radius:50%; margin-right:10px; display:flex; justify-content:center; align-items:center;">👤</div>
+            <span style="font-size:13px;">straycat</span>
+        </div>
+        <div style="display:flex; align-items:center;">
+            <span class="stars">★★★★☆</span>
+            <span class="review-title" style="margin-left:5px;">レア音声出た！！</span>
+        </div>
+        <div class="review-date">2025年12月19日に日本でレビュー済み</div>
+        <div class="verified-purchase">Amazonで購入</div>
+        <p>100回くらい連打してたら、突然<strong>「しかたなくないよ」</strong>って聞こえました！<br>星-1。</p>
+    </div>
+</div>
+
+<footer style="background-color:#232f3e; color:#fff; text-align:center; padding:30px; margin-top:30px; font-size:12px;">
+    <p>トップへ戻る（戻っても現実は変わりません）</p>
+    <div style="margin-top:20px;">
+        © 1996-2025, Kabazon.com, Inc. or its affiliates
+    </div>
+</footer>
+
+<script>
+    // --- 商品ページ＆カート機能のスクリプト ---
+
+    // カートの数を表示する関数（ページ読み込み時と更新時に使用）
+    function updateHeaderCartCount() {
+        const cart = JSON.parse(localStorage.getItem('kabazonCart')) || [];
+        const el = document.getElementById('header-cart-count');
+        if(el) el.innerText = cart.length;
+    }
+
+    // ページ読み込み時の初期化
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. カート数をヘッダーに表示
+        updateHeaderCartCount();
+
+        // 2. 音声ボタンの制御
+        const btn = document.getElementById('shikatanaiyo-btn');
+        const audioFiles = [
+            'voice01/voice (7).mp3',
+            'voice01/voice (1).mp3',
+            'voice01/voice (2).mp3',
+            'voice01/voice (3).mp3',
+            'voice01/voice (4).mp3',
+            'voice01/voice (5).mp3',
+            'voice01/voice (6).mp3'
+        ];
+        let currentAudio = null;
+
+        if(btn) {
+            btn.addEventListener('click', function() {
+                // アニメーション
+                btn.classList.remove('active-anim');
+                void btn.offsetWidth;
+                btn.classList.add('active-anim');
+
+                // 音声再生
+                const randomFile = audioFiles[Math.floor(Math.random() * audioFiles.length)];
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio.currentTime = 0;
+                }
+                currentAudio = new Audio(randomFile);
+                currentAudio.play().catch(error => {
+                    console.log('音声再生エラー:', error);
+                });
+                console.log('再生中:', randomFile);
+            });
+        }
+
+        // 3. 「カートに入れる」ボタンの動作
+        const addToCartBtn = document.querySelector('.btn-add-cart');
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', function() {
+                // 商品情報
+                const product = {
+                    name: '【令和最新版】しかたないよというボタン (プレミアムレッド)',
+                    price: 4980,
+                    imageEmoji: '🔴'
+                };
+                
+                // localStorageに追加
+                const cart = JSON.parse(localStorage.getItem('kabazonCart')) || [];
+                cart.push(product);
+                localStorage.setItem('kabazonCart', JSON.stringify(cart));
+                
+                // 表示更新
+                updateHeaderCartCount();
+                
+                // ユーザーへ通知
+                if(confirm('カートに追加しました。\nカートを確認しますか？')) {
+                    location.href = 'cart.html';
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
